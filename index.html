@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html ng-app="app">
+    <head>
+        <meta charset="UTF-8">
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.min.js"></script>
+        <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
+        <script src="js/top.js"></script>
+        <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
+        <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
+        <link rel="stylesheet" href="css/top.css">
+        <title>Fitness Record</title>
+    </head>
+    <body>
+        <div ng-switch="login_flg" ng-controller="MainController" class="center">
+            <!--ログイン画面・開始-->
+            <div ng-switch-when="false" ng-controller="LoginController" class="center">
+                <div><input class="text-input text-input--material" placeholder="Emailaddress" type="text" required ng-model="emailAddress"></div><br>
+                <div><input class="text-input text-input--material" placeholder="Password" type="password" required ng-model="passWord"></div><br>
+                <div><ons-button ng-click="login()">Login</ons-button></div>
+            </div>
+            <!--ログイン画面・終了-->
+
+            <!--メイン画面・開始-->
+            <div ng-switch-when="true" ng-controller="TopController">
+
+                <!--タブメニュー・開始-->
+                <ons-page>
+                    <ons-tabbar swipeable position="top">
+                        <ons-tab page="home.html" label="Home"></ons-tab>
+                        <ons-tab page="user.html" label="Userinfo"></ons-tab>
+                        <button class="button button--material--flat" ng-click="logout();">logout</button>
+                        <!--<ons-button class="button" ng-click="logout();">logout</ons-button>-->
+                    </ons-tabbar>
+                </ons-page>
+                <!--タブメニュー・終了-->
+
+                <!--ホーム画面・開始-->
+                <template class="template" id="home.html" class="center">
+                    <ons-page id="home">
+                        <br>
+                        <br>
+                        <span style="text-align: left;">Day：
+                            <input class="text-input text-input--material" placeholder="2018/01/01" value="{{start_day}}"" type="date" required>
+                            &nbsp～&nbsp&nbsp
+                            <input class="text-input text-input--material" placeholder="2018/12/31" value="{{end_day}}" type="date" required>
+                            <button class="button button--material--flat">Searach</button>
+                        </span>
+                    </ons-page>
+                </template>
+                <!--ホーム画面・終了-->
+
+                <!--ユーザー情報の登録・開始-->
+                <template class="template" id="user.html">
+                    <ons-page id="home">
+                        <br>
+                        <br>
+                        <div><input class="text-input text-input--material" placeholder="姓" type="text" required></div>
+                        <div><input class="text-input text-input--material" placeholder="名" type="text" required></div>
+                    </ons-page>
+                </template>
+                <!--ユーザー情報の登録・終了-->
+            </div>
+            <!--メイン画面・終了-->
+        </div>
+    </body>
+</html>
